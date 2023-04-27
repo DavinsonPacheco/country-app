@@ -1,0 +1,8 @@
+<input 
+    type="text"
+    [placeholder]="placeholder"
+    title="Busca un pais"
+    class="form-control"
+    (keyup.enter)="emitValue( txtInput.value )"
+    #txtInput
+    >
