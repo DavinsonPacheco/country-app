@@ -7,40 +7,28 @@ import { Country } from '../../interfaces/country';
 @Component({
   selector: 'app-country-page',
   templateUrl: './country-page.component.html',
-  styles: [
-  ]
+  styles: [],
 })
-export class CountryPageComponent implements OnInit{
-
+export class CountryPageComponent implements OnInit {
   public country?: Country;
 
-  constructor( 
+  constructor(
     private acivatedRoute: ActivatedRoute,
     private router: Router,
-    private countriesService: CountriesService,
-    ){
-
-  }
-
+    private countriesService: CountriesService
+  ) {}
 
   ngOnInit(): void {
-
     this.acivatedRoute.params
-    .pipe(
-      switchMap( ({id}) => this.countriesService.searchCountryByAlphaCode(id))
-    )
-    .subscribe(
-      country => {
+      .pipe(
+        switchMap(({ id }) =>
+          this.countriesService.searchCountryByAlphaCode(id)
+        )
+      )
+      .subscribe((country) => {
+        if (!country) return this.router.navigateByUrl('');
 
-        if( !country ) return this.router.navigateByUrl('');
-      
-        return this.country = country;
-        
-        
+        return (this.country = country);
       });
-
-
   }
-  
-
 }
